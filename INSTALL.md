@@ -3,7 +3,8 @@
 ### 依赖环境
 - Python 3.8+
 - Tkinter 图形库
+- pyinstaller 打包工具
 
 ### EXE打包命令
 ```bash
-pyinstaller --onefile --windowed --noconsole --add-data "Data;Data/" codes.py
+python build.py
