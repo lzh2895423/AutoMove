@@ -1,21 +1,5 @@
 [
     {
-        "name": "Il2CppOutputProject",
-        "src_rel": ["unityLibrary", "src", "main", "Il2CppOutputProject"],
-        "dst_rel": ["APK", "IL2CppSO", "Il2CppOutputProject"],
-        "mode": "default",
-        "default_value": true,
-        "isShow": false
-    },
-    {
-        "name": "jniStaticLibs",
-        "src_rel": ["unityLibrary", "src", "main", "jniStaticLibs"],
-        "dst_rel": ["APK", "IL2CppSO", "jniStaticLibs"],
-        "mode": "default",
-        "default_value": true,
-        "isShow": false
-    },
-    {
         "name": "assets",
         "src_rel": ["unityLibrary", "src", "main", "assets"],
         "dst_rel": ["app", "src", "main", "assets"],
