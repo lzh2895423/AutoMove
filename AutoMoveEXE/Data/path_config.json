@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Il2CppOutputProject",
+        "src_rel": ["unityLibrary", "src", "main", "Il2CppOutputProject"],
+        "dst_rel": ["APK", "IL2CppSO", "Il2CppOutputProject"],
+        "mode": "default",
+        "default_value": true,
+        "isShow": false
+    },
+    {
+        "name": "jniStaticLibs",
+        "src_rel": ["unityLibrary", "src", "main", "jniStaticLibs"],
+        "dst_rel": ["APK", "IL2CppSO", "jniStaticLibs"],
+        "mode": "default",
+        "default_value": true,
+        "isShow": false
+    },
+    {
+        "name": "assets",
+        "src_rel": ["unityLibrary", "src", "main", "assets"],
+        "dst_rel": ["app", "src", "main", "assets"],
+        "mode": "default",
+        "default_value": true,
+        "isShow": true
+    },
+    {
+        "name": "FirstPackAsset",
+        "src_rel": ["unityLibrary", "src", "main", "assets"],
+        "dst_rel": ["FirstPackAsset", "src", "main", "assets"],
+        "mode": "default",
+        "default_value": true,
+        "isShow": false
+    },
+    {
+        "name": "jniLibs",
+        "src_rel": ["unityLibrary", "src", "main", "jniLibs"],
+        "dst_rel": ["app", "src", "main", "jniLibs"],
+        "mode": "default",
+        "default_value": true,
+        "isShow": true
+    },
+    {
+        "name": "libs (智能同步)",
+        "src_rel": ["unityLibrary", "libs"],
+        "dst_rel": ["app", "libs", "main"],
+        "mode": "libs",
+        "default_value": true,
+        "isShow": false
+    }
+]
