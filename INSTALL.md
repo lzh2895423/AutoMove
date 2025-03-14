@@ -1,9 +1,9 @@
-## °²×°Ö¸ÄÏ
+## å®‰è£…æŒ‡å—
 
-### ÒÀÀµ»·¾³
+### ä¾èµ–ç¯å¢ƒ
 - Python 3.8+
-- Tkinter Í¼ĞÎ¿â
+- Tkinter å›¾å½¢åº“
 
-### EXE´ò°üÃüÁî
+### EXEæ‰“åŒ…å‘½ä»¤
 ```bash
 pyinstaller --onefile --windowed --noconsole --add-data "Data;Data/" codes.py
