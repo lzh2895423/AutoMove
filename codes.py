@@ -343,35 +343,31 @@ class FileSyncApp:
         return current_file_count
 
     def sync_libs_with_progress(self, src, dst, data_path, total_files, current_file_count, subdir_vars=None):
-        """智能同步libs目录，并更新进度条"""
-        # 改为遍历目标目录
-        for root, dirs, files in os.walk(dst):
-            rel_path = os.path.relpath(root, dst)
-            src_root = os.path.join(src, rel_path)
+            """智能同步libs目录，并更新进度条"""
+            for root, dirs, files in os.walk(src):
+                rel_path = os.path.relpath(root, src)
+                dst_root = os.path.join(dst, rel_path)
 
-            # 子目录过滤：修改dirs列表控制遍历
-            filtered_dirs = []
-            for dir_name in dirs:
-                # 检查该子目录是否在subdir_vars且未被选中
-                if subdir_vars and dir_name in subdir_vars and not subdir_vars[dir_name].get():
-                    continue
-                filtered_dirs.append(dir_name)
-            dirs[:] = filtered_dirs  # 重要：控制os.walk的遍历范围
+                # 创建目标目录
+                os.makedirs(dst_root, exist_ok=True)
 
-            # 处理文件（仅覆盖目标存在的文件）
-            for file in files:
-                src_file = os.path.join(src_root, file)
-                dst_file = os.path.join(root, file)
-                
-                # 仅当源文件存在时才覆盖
-                if os.path.exists(src_file):
-                    shutil.copy2(src_file, dst_file)
-                    relative_path = os.path.relpath(dst_file, data_path)
-                    current_file_count += 1
-                    self.current_file_label.config(text=f"当前文件路径：{relative_path}")
-                    self.master.update_idletasks()
+                for dir_name in dirs:
+                    if subdir_vars and dir_name in subdir_vars and not subdir_vars[dir_name].get():
+                        continue  # 跳过未选中的子文件夹
 
-        return current_file_count
+                # 同步文件
+                for file in files:
+                    src_file = os.path.join(root, file)
+                    dst_file = os.path.join(dst_root, file)
+                    if os.path.exists(dst_file):
+                        shutil.copy2(src_file, dst_file)
+                        relative_path = os.path.relpath(src_file, data_path)
+                        current_file_count += 1
+                        # self.update_progress(relative_path, total_files, current_file_count)
+                        self.current_file_label.config(text=f"当前文件路径：{relative_path}")
+                        self.master.update_idletasks()
+
+            return current_file_count
 
     def update_progress(self, file_path, total_files, current_file_count):
         """更新进度条和当前文件路径"""
