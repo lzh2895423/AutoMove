@@ -16,7 +16,7 @@ class FileSyncApp:
                     font=('微软雅黑', 9, 'bold'))
 
         self.master = master
-        master.title("安卓TEST：Data资源同步工具 v1.2.1")
+        master.title("安卓TEST：Data资源同步工具 v1.2.1.3")
 
         # 初始化配置
         self.schemes = {}
@@ -207,22 +207,25 @@ class FileSyncApp:
         self.as_entry.insert(0, config["as_path"])
         
         # 更新复选框状态
-        for cfg in self.path_config:
-            main_var = config["selections"].get(cfg["name"], False)
-            cfg["var"].set(main_var)
-            
-            # 恢复子文件夹选择状态
-            subdir_selections = config.get("subdir_selections", {}).get(cfg["name"], {})
-            for subdir, value in subdir_selections.items():
-                if subdir in cfg["subdir_vars"]:
-                    cfg["subdir_vars"][subdir].set(value)
-                        
-                # 重新加载子文件夹到TreeView
-                self.load_subdirs(cfg)
+        try:
+            for cfg in self.path_config:
+                main_var = config["selections"].get(cfg["name"], False)
+                cfg["var"].set(main_var)
+                
+                # 恢复子文件夹选择状态
+                subdir_selections = config.get("subdir_selections", {}).get(cfg["name"], {})
+                for subdir, value in subdir_selections.items():
+                    if subdir in cfg["subdir_vars"]:
+                        cfg["subdir_vars"][subdir].set(value)
+                            
+                    # 重新加载子文件夹到TreeView
+                    self.load_subdirs(cfg)
 
-            # 如果配置项被选中且配置项有子文件夹，则显示子文件夹
-            if cfg["var"].get() and cfg.get("isShow", False):
-                self.toggle_subdir_display(cfg)
+                # 如果配置项被选中且配置项有子文件夹，则显示子文件夹
+                if cfg["var"].get() and cfg.get("isShow", False):
+                    self.toggle_subdir_display(cfg)
+        except Exception as e:
+            messagebox.showerror("错误", f"更新复选框状态失败: {str(e)}")
         
         self.current_scheme = scheme_combo
 
@@ -511,6 +514,7 @@ class FileSyncApp:
             error_msg = f"路径不存在: {src_path}"
             print(f"[ERROR] {error_msg}")  # 错误日志
             messagebox.showerror("错误", error_msg)
+            raise Exception("路径不存在: "+src_path) 
 
 
 
